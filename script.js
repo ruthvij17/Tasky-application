@@ -121,7 +121,9 @@ const deleteTask = (e) => {
     //console.log(targetId)
     const type = e.target.tagName;
     const removeTask = state.taskList.filter(({ id }) => id !== targetId);
-    //console.log(removeTask)
+    //console.log(removeTask[targetId]);
+    state.taskList=removeTask;
+    //localStorage.removeItem(state.taskList.targetId);
     updateLocalStorage();
 
     if (type === "BUTTON") {
@@ -133,7 +135,6 @@ const deleteTask = (e) => {
             e.target.parentNode.parentNode.parentNode.parentNode
         );
     }
-    updateLocalStorage();
 };
 
 //edit task
@@ -214,21 +215,22 @@ const saveEdit = (e) => {
     taskType.setAttribute("contentEditable", "false");
 
     submitButton.setAttribute("onclick", "openTask.apply(this,arguments)");
-    submitButton.setAttribute("data-bs-toggle","modal");
-    submitButton.setAttribute("data-bs-target","#showTask");
+    submitButton.setAttribute("data-bs-toggle", "modal");
+    submitButton.setAttribute("data-bs-target", "#showTask");
     submitButton.innerHTML = "Open task";
 };
 
 //search
-const searchTask = (e) =>{
+const searchTask = (e) => {
     if (!e) e = window.event;
 
-    while(taskContents.firstChild){
+    while (taskContents.firstChild) {
         taskContents.removeChild(taskContents.firstChild)
     }
-    const resultData =state.taskList.filter(({title}) =>{
-        title.includes(e.target.value)
-    });
+    const resultData = state.taskList.filter(({ title }) => title.toLowerCase().includes(e.target.value.toLowerCase()));
 
-    console.log(resultData);
-}
+    //console.log(resultData);
+    resultData.map((cardData) => {
+        taskContents.insertAdjacentHTML("beforeEnd", htmlTaskContent(cardData));
+    });
+};
