@@ -103,7 +103,16 @@ const handleSubmit = (event) => {
     state.taskList.push({ ...input, id });
 
     updateLocalStorage();
+    inputClear();
 };
+
+const inputClear =()=>{
+    let clear=document.getElementsByClassName("clear");
+    console.log(clear[0])
+    for(i=0;i<clear.length;i++){
+        clear[i].value="";
+    }
+}
 
 
 const openTask = (e) => {
@@ -234,3 +243,9 @@ const searchTask = (e) => {
         taskContents.insertAdjacentHTML("beforeEnd", htmlTaskContent(cardData));
     });
 };
+
+const toggle =()=>{
+    let tog=document.getElementById("big__screen");
+    let display_value=tog.style.display=="none"?"block":"none";
+    tog.style.display=display_value;
+}
