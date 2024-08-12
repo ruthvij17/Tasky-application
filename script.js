@@ -103,6 +103,14 @@ const handleSubmit = (event) => {
     state.taskList.push({ ...input, id });
 
     updateLocalStorage();
+    clear_input();
+};
+
+const clear_input=()=>{
+    let clr=document.getElementsByClassName("clear");
+    for (i=0;i<clr.length;i++){
+        clr[i].value="";
+    };
 };
 
 
