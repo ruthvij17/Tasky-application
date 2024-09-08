@@ -228,19 +228,35 @@ const saveEdit = (e) => {
   submitButton.innerHTML = "Open task";
 };
 
-//search
 const searchTask = (e) => {
   if (!e) e = window.event;
 
+  // Clear the current task list display
   while (taskContents.firstChild) {
     taskContents.removeChild(taskContents.firstChild);
   }
-  const resultData = state.taskList.filter(({ title }) =>
-    title.toLowerCase().includes(e.target.value.toLowerCase())
-  );
 
-  //console.log(resultData);
-  resultData.map((cardData) => {
-    taskContents.insertAdjacentHTML("beforeEnd", htmlTaskContent(cardData));
-  });
+  const searchTerm = e.target.value.toLowerCase();
+
+  if (searchTerm === "") {
+    // If the search term is empty, reload all tasks
+    state.taskList.map((cardData) =>
+      taskContents.insertAdjacentHTML("beforeend", htmlTaskContent(cardData))
+    );
+  } else {
+    // Filter tasks based on the search term
+    const resultData = state.taskList.filter(({ title }) =>
+      title.toLowerCase().includes(searchTerm)
+    );
+
+    if (resultData.length === 0) {
+      // Display a 'No tasks found' message if no tasks match
+      taskContents.innerHTML = `<h5 class="text-center mt-3">No tasks found</h5>`;
+    } else {
+      // Display the matching tasks
+      resultData.map((cardData) =>
+        taskContents.insertAdjacentHTML("beforeend", htmlTaskContent(cardData))
+      );
+    }
+  }
 };
