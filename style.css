@@ -1,26 +1,28 @@
-*{
-    box-sizing: border-box;
-    margin:0;
-    padding:0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    background-color: #ebf2ff !important;
-    color:black
+body {
+  background: url("https://png.pngtree.com/background/20210716/original/pngtree-simple-office-desktop-background-picture-image_1337980.jpg")
+    no-repeat center center fixed;
+  color: black;
+  background-size: cover;
 }
 
-.add__new__btn__mobile__only{
-    position: fixed;
-    bottom: 0;
-    right:0;
-    padding:15px 12px;
-    background-color: white;
-    width:100%;
-    z-index:3;
+.add__new__btn__mobile__only {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 15px 12px;
+  background-color: white;
+  width: 100%;
+  z-index: 3;
 }
 
-@media (min-width:768px){
-    .add__new__btn__mobile__only{
-        display: none;
-    }
+@media (min-width: 768px) {
+  .add__new__btn__mobile__only {
+    display: none;
+  }
 }
