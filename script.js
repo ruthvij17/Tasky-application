@@ -228,19 +228,26 @@ const saveEdit = (e) => {
   submitButton.innerHTML = "Open task";
 };
 
-//search
+// Search tasks
 const searchTask = (e) => {
   if (!e) e = window.event;
 
+  // Clear the current task list display
   while (taskContents.firstChild) {
     taskContents.removeChild(taskContents.firstChild);
   }
+
   const resultData = state.taskList.filter(({ title }) =>
     title.toLowerCase().includes(e.target.value.toLowerCase())
   );
 
-  //console.log(resultData);
-  resultData.map((cardData) => {
-    taskContents.insertAdjacentHTML("beforeEnd", htmlTaskContent(cardData));
-  });
+  // If no tasks match, display a 'No tasks found' message
+  if (resultData.length === 0) {
+    taskContents.innerHTML = <h5 class="text-center mt-3">No tasks found</h5>;
+  } else {
+    // Display the matching tasks
+    resultData.map((cardData) =>
+      taskContents.insertAdjacentHTML("beforeend", htmlTaskContent(cardData))
+    );
+  }
 };
