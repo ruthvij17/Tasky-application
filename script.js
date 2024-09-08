@@ -228,6 +228,10 @@ const saveEdit = (e) => {
   submitButton.innerHTML = "Open task";
 };
 
+<<<<<<< HEAD
+=======
+// Search tasks
+>>>>>>> origin/master
 const searchTask = (e) => {
   if (!e) e = window.event;
 
@@ -235,6 +239,7 @@ const searchTask = (e) => {
   while (taskContents.firstChild) {
     taskContents.removeChild(taskContents.firstChild);
   }
+<<<<<<< HEAD
 
   const searchTerm = e.target.value.toLowerCase();
 
@@ -259,4 +264,20 @@ const searchTask = (e) => {
       );
     }
   }
+=======
+
+  const resultData = state.taskList.filter(({ title }) =>
+    title.toLowerCase().includes(e.target.value.toLowerCase())
+  );
+
+  // If no tasks match, display a 'No tasks found' message
+  if (resultData.length === 0) {
+    taskContents.innerHTML = <h5 class="text-center mt-3">No tasks found</h5>;
+  } else {
+    // Display the matching tasks
+    resultData.map((cardData) =>
+      taskContents.insertAdjacentHTML("beforeend", htmlTaskContent(cardData))
+    );
+  }
+>>>>>>> origin/master
 };
