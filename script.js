@@ -228,10 +228,6 @@ const saveEdit = (e) => {
   submitButton.innerHTML = "Open task";
 };
 
-<<<<<<< HEAD
-=======
-// Search tasks
->>>>>>> origin/master
 const searchTask = (e) => {
   if (!e) e = window.event;
 
@@ -239,45 +235,21 @@ const searchTask = (e) => {
   while (taskContents.firstChild) {
     taskContents.removeChild(taskContents.firstChild);
   }
-<<<<<<< HEAD
 
   const searchTerm = e.target.value.toLowerCase();
 
-  if (searchTerm === "") {
-    // If the search term is empty, reload all tasks
-    state.taskList.map((cardData) =>
-      taskContents.insertAdjacentHTML("beforeend", htmlTaskContent(cardData))
-    );
-  } else {
-    // Filter tasks based on the search term
-    const resultData = state.taskList.filter(({ title }) =>
-      title.toLowerCase().includes(searchTerm)
-    );
-
-    if (resultData.length === 0) {
-      // Display a 'No tasks found' message if no tasks match
-      taskContents.innerHTML = `<h5 class="text-center mt-3">No tasks found</h5>`;
-    } else {
-      // Display the matching tasks
-      resultData.map((cardData) =>
-        taskContents.insertAdjacentHTML("beforeend", htmlTaskContent(cardData))
-      );
-    }
-  }
-=======
-
+  // Filter tasks based on the search term
   const resultData = state.taskList.filter(({ title }) =>
-    title.toLowerCase().includes(e.target.value.toLowerCase())
+    title.toLowerCase().includes(searchTerm)
   );
 
-  // If no tasks match, display a 'No tasks found' message
-  if (resultData.length === 0) {
-    taskContents.innerHTML = <h5 class="text-center mt-3">No tasks found</h5>;
-  } else {
-    // Display the matching tasks
+  if (searchTerm === "" || resultData.length > 0) {
+    // If the search term is empty or there are matching tasks, display them
     resultData.map((cardData) =>
       taskContents.insertAdjacentHTML("beforeend", htmlTaskContent(cardData))
-    );
-  }
->>>>>>> origin/master
+    );
+  } else {
+    // If no tasks match, display a 'No tasks found' message
+    taskContents.innerHTML = `<h5 class="text-center mt-3">No tasks found</h5>`;
+  }
 };
